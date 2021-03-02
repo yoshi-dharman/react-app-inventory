@@ -20,7 +20,7 @@ function AllRoute(props) {
                 <Register />
             </Route>
             <Route path="/inventory">
-                <Inventory />
+                <Inventory setButton={props.setButton} setActive={props.setActive}/>
             </Route>
         </Switch>
     )

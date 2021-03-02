@@ -5,21 +5,21 @@ import HelloLogout from './HelloLogout';
 
 let button;
 
-function changeButton() {
+function changeButton(props) {
     
     if(localStorage.user){
         let dataUser = JSON.parse(localStorage.user);
         button = <HelloLogout name={dataUser.name}/>
     }
     else{
-        button = <SignInUp />
+        button = <SignInUp setButton={props.setButton} active={props.active} setActive={props.setActive}/>
     }
 
 }
 
-function LoginControl() { 
+function LoginControl(props) { 
 
-    changeButton();
+    changeButton(props);
     return (
         <>
             {button}

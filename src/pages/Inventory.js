@@ -6,8 +6,9 @@ import { useHistory } from "react-router-dom";
 
 import InventoryItem from '../components/InventoryItem';
 import ModalEdit from '../components/ModalEdit';
+import LoginControl from '../components/LoginControl';
 
-function Inventory() {
+function Inventory(props) {
     let history = useHistory();
     let url = "https://6023acfe6bf3e6001766b5db.mockapi.io/inventory";
     const [inventory, setInventory] = useState("");
@@ -17,13 +18,15 @@ function Inventory() {
     useEffect(()=>{
         if(!localStorage.user){
             alert("Anda belum login!");
+            props.setActive("Login");
+            props.setButton(<LoginControl setButton={props.setButton} active={"Sign In"} setActive={props.setActive}/>)
             history.push("/login");
         }else{
             axios.get(url)
             .then((response) => setInventory(response.data))
             .catch(err => "ada error : "+err);
         }
-    }, [history, url]);
+    }, [history, url, props]);
 
     function submitHandle(e){
         e.preventDefault();

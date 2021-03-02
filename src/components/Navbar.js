@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
 
@@ -7,8 +7,6 @@ function activeNav(event,setActive){
 }
 
 function Navbar(props) {
-
-    const [active, setActive] = useState("Home");
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -21,11 +19,11 @@ function Navbar(props) {
                         {/* <a class="nav-link active" aria-current="page" href="#">tes</a> */}
                         <div className="flex-lg-row flex-column d-flex">
                             <li className="nav-item">      
-                                <Link onClick={(event) => activeNav(event,setActive)} to="/" className={active === "Home" ?
+                                <Link onClick={(event) => activeNav(event,props.setActive)} to="/" className={props.active === "Home" ?
                                 "nav-link active" : "nav-link"}>Home</Link>
                             </li>
                             <li className="nav-item">
-                                <Link onClick={(event) => activeNav(event,setActive)} to="/inventory" className={active === "Inventory" ?
+                                <Link onClick={(event) => activeNav(event,props.setActive)} to="/inventory" className={props.active === "Inventory" ?
                                 "nav-link active" : "nav-link"}>Inventory</Link>
                             </li>
                         </div>

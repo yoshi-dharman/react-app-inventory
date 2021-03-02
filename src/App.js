@@ -1,5 +1,5 @@
 //React
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 
 //Components
@@ -12,18 +12,21 @@ import './App.css';
 import './css/my.css';
 
 function App() {
-  const [button, setButton] = useState(<LoginControl />)
+  const [active, setActive] = useState("Home");
+  const [button, setButton] = useState("");
   // const [angka, setAngka] = useState(0);
 
-
+  useEffect(() => {
+    setButton(<LoginControl setButton={setButton} active={active} setActive={setActive}/>);
+  }, [])
 
   return (
 
     <div>
-      <Navbar button={button}/>
-      
+      <Navbar active={active} setActive={setActive} button={button} setButton={setButton}/>
+      {/* {active} */}
       <div className="container mt-3">
-        <AllRoute setButton={setButton}/>
+        <AllRoute setActive={setActive} setButton={setButton}/>
       </div>
 
     </div>
