@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import axios from 'axios';
 
 function ModalEdit(props) {
 
     const [input, setInput] = useState("")
+    const inputVal = useRef(null);
+    const closeBtn = useRef(null);
 
     function editHandle(){
         axios.put(props.url+"/"+props.invenEdit.id, {inventory : input})
@@ -18,7 +20,7 @@ function ModalEdit(props) {
                 
             })
             setInput("");
-            document.getElementById("closeIt").click();
+            closeBtn.current.click();
             props.setInventory(newData);
         })
     }
@@ -28,7 +30,8 @@ function ModalEdit(props) {
     }
 
     useEffect(() => {
-        document.getElementById("inputInventory").value ="";  
+        // document.getElementById("inputInventory").value =""; 
+        inputVal.current.value = ""; 
     })
 
 
@@ -38,10 +41,10 @@ function ModalEdit(props) {
             <div className="modal-content">
             <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">{props.invenEdit.inventory}</h5>
-                <button id="closeIt" type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button ref={closeBtn} id="closeIt" type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
-            <input onChange={newInput} value={input} type="text" className="form-control" id="inputInventory" placeholder="Input New Inventory"></input>
+            <input ref={inputVal} onChange={newInput} value={input} type="text" className="form-control" id="inputInventory" placeholder="Input New Inventory"></input>
             </div>
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
