@@ -18,7 +18,7 @@ function Inventory(props) {
     useEffect(()=>{
         if(!localStorage.user){
             alert("Anda belum login!");
-            props.setActive("Login");
+            props.setActive("Sign In");
             props.setButton(<LoginControl setButton={props.setButton} active={"Sign In"} setActive={props.setActive}/>)
             history.push("/login");
         }else{

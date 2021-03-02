@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     setButton(<LoginControl setButton={setButton} active={active} setActive={setActive}/>);
-  }, [])
+  }, [active])
 
   return (
 
